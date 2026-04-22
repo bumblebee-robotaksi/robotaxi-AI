@@ -1,3 +1,3 @@
 # learning-repo
 Takım üyelerinin öğrendiklerini uygulaması için bir repository
-bu bir denemedir
+bu bir denemedir deneme

@@ -34,8 +34,8 @@ class InferenceNode(Node):
         
         sensor_qos = QoSProfile(reliability=ReliabilityPolicy.BEST_EFFORT,history=HistoryPolicy.KEEP_LAST,depth=10)
         
-        self.objects_pub = self.create_publisher(String, '/beemobs/objects', 10)
-        self.ped_pub = self.create_publisher(Bool, '/beemobs/pedestrian_detected', 10)
+        self.objects_pub = self.create_publisher(String, '/objects', 10)
+        self.ped_pub = self.create_publisher(Bool, '/pedestrian_detected', 10)
         
         self.running = True
         self.infer_interval = 0.1
@@ -43,8 +43,8 @@ class InferenceNode(Node):
         self.crosswalk_memory = 0
         self.crosswalk_hold = 8
         
-        self.create_subscription(Image, '/beemobs/camera/image_raw', self.image_callback, sensor_qos)
-        self.create_subscription(Image, '/beemobs/seg_mask', self.mask_callback, sensor_qos)
+        self.create_subscription(Image, '/camera/image_raw', self.image_callback, sensor_qos)
+        self.create_subscription(Image, '/seg_mask', self.mask_callback, sensor_qos)
         self.create_subscription(LaserScan, '/scan', self.scan_callback, 10)
         
         self.thread = threading.Thread(target=self.infer_loop, daemon=True)

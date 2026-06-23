@@ -1,45 +1,22 @@
-# Bumblebee Perception Paketi
+# robotaxi-AI
 
-TEKNOFEST Robotaksi – Binek Otonom Araç Yarışması (Hazır Araç kategorisi) için geliştirilen ROS 2 perception (algı) paketi. Kamera, segmentasyon maskesi ve LIDAR verilerini kullanarak nesne tespiti ve şerit tespiti yapar.
+Takım Bumblebee'nin TEKNOFEST Robotaksi-Binek Otonom Araç Yarışması
+kapsamında algılama (perception) modülleri üzerinde yürüttüğü araştırma
+ve geliştirme çalışmalarının deposu.
 
-## Node'lar
+Bu depo, yarışma yazılımının algılama katmanını (nesne tespiti, şerit
+tespiti, yol segmentasyonu) geliştiren takım üyelerinin çalışma alanıdır.
+Buradaki modüller, simülasyon ve gerçek araç entegrasyonundan önceki
+araştırma/eğitim aşamasını temsil etmektedir.
 
-| Node | Dosya | Görevi |
-|---|---|---|
-| `inference_node` | `object_detection_node.py` | YOLOv8 ile 19 sınıf nesne tespiti (trafik işaretleri, yaya, ışıklar) |
-| `teknofest_lane_node` | `lane_detection_node.py` | Segmentasyon maskesi üzerinden şerit tespiti ve şerit merkezi hatası hesaplama |
+## İçerik
 
-## Topic'ler
+- [`perception/`](perception/) — Nesne tespiti (YOLOv8n), şerit tespiti,
+  yol segmentasyonu kodları, eğitilmiş model ağırlıkları ve eğitim
+  sonuçları. Detaylar için [`perception/README.md`](perception/README.md)
+  dosyasına bakınız.
 
-**inference_node**
-- Dinler: `/camera/image_raw`, `/seg_mask`, `/scan`
-- Yayınlar: `/objects` (JSON tespit listesi), `/pedestrian_detected` (Bool)
+## Takım
 
-**teknofest_lane_node**
-- Dinler: `/mission_state`, `/seg_mask`, `/scan`
-- Yayınlar: `/lane_detection` → `[error, angle, left_distance, right_distance, violation]`
-
-## Güvenlik
-
-Her iki node da `/scan` üzerinden LIDAR verisini izler; tanımlı bir mesafenin altında engel algılandığında işlemeyi geçici olarak durdurur.
-
-## Gereksinimler
-
-```bash
-pip install ultralytics opencv-python numpy
-```
-- ROS 2 (Humble veya üstü)
-- `rclpy`, `cv_bridge`, `sensor_msgs`, `std_msgs`
-- Eğitilmiş YOLOv8 ağırlık dosyası (`best.pt`)
-
-## Çalıştırma
-
-```bash
-ros2 run perception_package object_detection_node
-ros2 run perception_package lane_detection_node
-```
-
-## Ekip
-
-TEKNOFEST Robotaksi – Binek Otonom Araç Yarışması, Hazır Araç Kategorisi
-Ankara Üniversitesi
+**Takım Adı:** Bumblebee
+**Kategori:** Hazır Araç (BEE1 Platformu)

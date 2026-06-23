@@ -129,7 +129,7 @@ class SegmentationNode(Node):
                     cv2.rectangle(debug_frame, (x, y), (x + w, y + h), (0, 0, 255), 2) # Kırmızı Kutu çiz
                     cv2.putText(debug_frame, "KIRMIZI", (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
-            # YEŞİL IŞIKLARI KUTUYA AL 
+            # YEŞİL IŞIKLARI KUTUYA AL
             contours_green, _ = cv2.findContours(mask_green, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
             for cnt in contours_green:
                 if cv2.contourArea(cnt) > 60:
